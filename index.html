@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insure Portal — Run your whole district from one place</title>
+<meta name="description" content="Insure Portal is your agency's private network and operations hub — production tracking, team management, and communication built around how a life-insurance district actually runs.">
+<meta name="theme-color" content="#1b2420">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Insure Portal — Run your whole district from one place">
+<meta property="og:description" content="Production tracking, team management, and communication in one private hub — built for life-insurance districts, branches, units, and agents.">
+<meta property="og:url" content="https://insure-portal-site.vercel.app/">
+<meta property="og:image" content="https://insure-portal-site.vercel.app/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --paper: #f4f5f1;
+    --white: #ffffff;
+    --ink: #1b2420;
+    --ink-soft: #2c3630;
+    --muted: #5c6560;
+    --faint: #8b9289;
+    --line: #dbdfd6;
+    --brass: #92672f;
+    --brass-ink: #6e4d22;
+    --brass-soft: #f1e6d3;
+    --tan: #a17d4f;
+    --brass-bright: #c9963f;
+    --paper-on-ink: rgba(244, 245, 241, 0.78);
+    --good: #2f6f52;
+    --good-soft: #e4efe7;
+    --shadow-sm: 0 1px 2px rgba(27, 36, 32, 0.05), 0 6px 18px rgba(27, 36, 32, 0.05);
+    --shadow-lg: 0 2px 4px rgba(27, 36, 32, 0.06), 0 18px 48px rgba(27, 36, 32, 0.10);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--brass-soft); }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .serif { font-family: var(--serif); }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* ------------------------------------------------ nav */
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(244, 245, 241, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+
+  .nav.scrolled { border-bottom-color: var(--line); }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 64px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .brand svg { width: 28px; height: 28px; flex-shrink: 0; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 11px 22px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .btn:active { transform: translateY(1px); }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover { background: var(--ink-soft); }
+
+  .btn-ghost {
+    border-color: var(--line);
+    color: var(--ink);
+    background: transparent;
+  }
+
+  .btn-ghost:hover { border-color: var(--faint); }
+
+  .nav .btn { padding: 9px 18px; font-size: 14px; }
+
+  /* ------------------------------------------------ hero */
+
+  .hero { padding: 72px 0 64px; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brass-ink);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5.4vw, 56px);
+    line-height: 1.06;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--brass-ink);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0 0 30px;
+  }
+
+  .hero-sub strong { color: var(--ink); font-weight: 600; }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* dashboard vignette */
+
+  .vignette {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  .vig-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .vig-title {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .vig-chip {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat {
+    background: var(--white);
+    padding: 14px 18px;
+  }
+
+  .stat .label {
+    font-size: 10.5px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 2px;
+  }
+
+  .stat .num {
+    font-family: var(--mono);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .stat .num small {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--good);
+    margin-left: 6px;
+  }
+
+  .chart {
+    padding: 20px 18px 14px;
+  }
+
+  .chart-label {
+    font-size: 10.5px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 12px;
+  }
+
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 96px;
+  }
+
+  .bar {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: var(--ink);
+    transform-origin: bottom;
+  }
+
+  .bar.t { background: var(--tan); }
+  .bar.b { background: var(--brass); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .bar {
+      animation: grow 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+    }
+    .bar:nth-child(1) { animation-delay: 0.15s; }
+    .bar:nth-child(2) { animation-delay: 0.22s; }
+    .bar:nth-child(3) { animation-delay: 0.29s; }
+    .bar:nth-child(4) { animation-delay: 0.36s; }
+    .bar:nth-child(5) { animation-delay: 0.43s; }
+    .bar:nth-child(6) { animation-delay: 0.50s; }
+    .bar:nth-child(7) { animation-delay: 0.57s; }
+    .bar:nth-child(8) { animation-delay: 0.64s; }
+    @keyframes grow { from { transform: scaleY(0); } }
+  }
+
+  .vig-caption {
+    padding: 10px 18px 14px;
+    font-size: 11px;
+    color: var(--faint);
+  }
+
+  /* ------------------------------------------------ proof strip */
+
+  .proof {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--white);
+  }
+
+  .proof-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 26px 0;
+  }
+
+  .proof-item { text-align: center; }
+
+  .proof-item .big {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .proof-item .small {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ------------------------------------------------ sections */
+
+  .section { padding: 88px 0; }
+  .section.alt { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .sec-head { max-width: 640px; margin-bottom: 48px; }
+
+  .glyph {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 16px;
+    margin-bottom: 16px;
+  }
+
+  .glyph i {
+    display: block;
+    width: 5px;
+    border-radius: 1.5px;
+  }
+
+  .glyph i:nth-child(1) { height: 7px;  background: var(--ink); }
+  .glyph i:nth-child(2) { height: 11px; background: var(--tan); }
+  .glyph i:nth-child(3) { height: 16px; background: var(--brass); }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(27px, 3.6vw, 38px);
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+
+  .sec-sub {
+    font-size: 16.5px;
+    color: var(--muted);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  /* pain cards */
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .pain-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 26px 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section.alt .pain-card { background: var(--paper); box-shadow: none; }
+
+  .pain-card h3 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .pain-card p {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .pain-close {
+    margin-top: 36px;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--brass-ink);
+  }
+
+  /* role blocks */
+
+  .role {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: center;
+    padding: 56px 0;
+  }
+
+  .role + .role { border-top: 1px solid var(--line); }
+
+  .role-tag {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--brass-ink);
+    background: var(--brass-soft);
+    border: 1px solid #e3d3ac;
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+
+  .role h3 {
+    font-family: var(--serif);
+    font-size: clamp(23px, 2.8vw, 30px);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+
+  .role ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .role li {
+    display: flex;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .role li strong { color: var(--ink); font-weight: 600; }
+
+  .role li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--brass);
+    margin-top: 9px;
+  }
+
+  .role:nth-child(even) .role-copy { order: 2; }
+  .role:nth-child(even) .role-vig { order: 1; }
+
+  /* announcement vignette */
+
+  .compose {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .compose-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .select-mock {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 12px;
+  }
+
+  .select-mock::after {
+    content: "";
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--muted);
+  }
+
+  .post {
+    padding: 16px 18px;
+  }
+
+  .post-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--brass-ink);
+    background: var(--brass-soft);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 10px;
+  }
+
+  .post-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .avatar.brass { background: var(--brass); }
+
+  .post-who .name { font-size: 13.5px; font-weight: 600; line-height: 1.25; }
+  .post-who .meta { font-size: 11.5px; color: var(--faint); }
+
+  .post-body {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .post-actions {
+    display: flex;
+    gap: 18px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* roster vignette */
+
+  .roster-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 18px;
+  }
+
+  .roster-row + .roster-row { border-top: 1px solid var(--line); }
+
+  .roster-who { flex: 1; min-width: 0; }
+  .roster-who .name { font-size: 13.5px; font-weight: 600; line-height: 1.25; }
+  .roster-who .meta { font-size: 11.5px; color: var(--faint); }
+
+  .chip {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    padding: 4px 11px;
+    white-space: nowrap;
+  }
+
+  .chip.coded { background: var(--good-soft); color: var(--good); }
+  .chip.pending { background: var(--brass-soft); color: var(--brass-ink); }
+  .chip.action { background: var(--ink); color: var(--paper); }
+
+  /* ------------------------------------------------ trust band */
+
+  .trust {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 96px 0;
+  }
+
+  .trust .eyebrow { color: var(--brass-bright); }
+
+  .trust h2 { color: var(--paper); }
+
+  .trust .sec-sub { color: var(--paper-on-ink); }
+
+  .trust .glyph i:nth-child(1) { background: var(--paper); }
+  .trust .glyph i:nth-child(2) { background: #e8d9bc; }
+  .trust .glyph i:nth-child(3) { background: var(--brass-bright); }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 48px;
+  }
+
+  .trust-card {
+    background: rgba(244, 245, 241, 0.045);
+    border: 1px solid rgba(244, 245, 241, 0.14);
+    border-radius: 12px;
+    padding: 24px 24px 22px;
+  }
+
+  .trust-card .mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(201, 150, 63, 0.16);
+    color: var(--brass-bright);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .trust-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    color: var(--paper);
+  }
+
+  .trust-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--paper-on-ink);
+    margin: 0;
+  }
+
+  .trust-note {
+    margin-top: 36px;
+    font-size: 13.5px;
+    color: rgba(244, 245, 241, 0.55);
+    max-width: 62ch;
+  }
+
+  /* ------------------------------------------------ rollout */
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    counter-reset: step;
+  }
+
+  .step {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brass-ink);
+    margin-bottom: 14px;
+  }
+
+  .step h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .step p {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ------------------------------------------------ faq */
+
+  .faq-list {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  details {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 17px 20px;
+    font-size: 15.5px;
+    font-weight: 600;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  summary::after {
+    content: "+";
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--brass-ink);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  details[open] summary::after { transform: rotate(45deg); }
+
+  details p {
+    margin: 0;
+    padding: 0 20px 18px;
+    font-size: 14.5px;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+
+  /* ------------------------------------------------ closer */
+
+  .closer {
+    padding: 104px 0 96px;
+    text-align: center;
+  }
+
+  .closer h2 {
+    font-size: clamp(30px, 4.4vw, 46px);
+    max-width: 22ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .closer p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0 auto 34px;
+  }
+
+  .closer .cta-row { justify-content: center; }
+
+  .closer .fine {
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--faint);
+  }
+
+  /* ------------------------------------------------ footer */
+
+  footer {
+    border-top: 1px solid var(--line);
+    background: var(--white);
+    padding: 36px 0;
+  }
+
+  .foot-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .foot-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .foot-brand svg { width: 20px; height: 20px; }
+
+  .foot-links {
+    display: flex;
+    gap: 22px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .foot-links a { text-decoration: none; }
+  .foot-links a:hover { color: var(--ink); }
+
+  .foot-copy { font-size: 12px; color: var(--faint); }
+
+  /* ------------------------------------------------ reveal */
+
+  .reveal { opacity: 1; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ------------------------------------------------ responsive */
+
+  @media (max-width: 880px) {
+    .hero { padding: 48px 0 56px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .nav-links .anchor { display: none; }
+    .role { grid-template-columns: 1fr; gap: 28px; padding: 44px 0; }
+    .role:nth-child(even) .role-copy { order: 1; }
+    .role:nth-child(even) .role-vig { order: 2; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .proof-inner { grid-template-columns: 1fr 1fr; gap: 14px; padding: 22px 0; }
+    .section { padding: 64px 0; }
+    .trust { padding: 72px 0; }
+    .closer { padding: 72px 0 64px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================================================== nav -->
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Insure Portal — back to top">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50,7 L83,20 V47 C83,71 68,86 50,93 C32,86 17,71 17,47 V20 Z" fill="none" stroke="#1b2420" stroke-width="4.2" stroke-linejoin="round"/>
+        <rect x="31.5" y="53" width="8.5" height="14" rx="1.6" fill="#1b2420"/>
+        <rect x="45.75" y="44" width="8.5" height="23" rx="1.6" fill="#a17d4f"/>
+        <rect x="60" y="33" width="8.5" height="34" rx="1.6" fill="#92672f"/>
+      </svg>
+      Insure Portal
+    </a>
+    <div class="nav-links">
+      <a class="anchor" href="#features">Features</a>
+      <a class="anchor" href="#security">Security</a>
+      <a class="anchor" href="#rollout">Rollout</a>
+      <a class="anchor" href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20demo%20request">Request a demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================================================== hero -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">For life-insurance districts &amp; branches</p>
+      <h1>Run your whole district from <em>one place.</em></h1>
+      <p class="hero-sub">Insure Portal is your agency's private network and operations hub — <strong>production tracking, team management, and communication</strong> built around how a district actually runs: district → area → branch → unit → agent.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20demo%20request">Request a demo</a>
+        <a class="btn btn-ghost" href="#features">See what's inside</a>
+      </div>
+    </div>
+
+    <figure class="vignette" style="margin:0" role="img" aria-label="Illustrative preview of the district dashboard showing production totals and a monthly chart">
+      <div class="vig-head">
+        <span class="vig-title">District Dashboard</span>
+        <span class="vig-chip">This month</span>
+      </div>
+      <div class="stat-grid" aria-hidden="true">
+        <div class="stat"><div class="label">Total APE</div><div class="num">₱424,000<small>▲</small></div></div>
+        <div class="stat"><div class="label">NAP</div><div class="num">₱409,000</div></div>
+        <div class="stat"><div class="label">Case count</div><div class="num">5</div></div>
+        <div class="stat"><div class="label">Recruits coded</div><div class="num">5</div></div>
+      </div>
+      <div class="chart" aria-hidden="true">
+        <div class="chart-label">APE — daily</div>
+        <div class="bars">
+          <div class="bar" style="height:34%"></div>
+          <div class="bar" style="height:52%"></div>
+          <div class="bar" style="height:41%"></div>
+          <div class="bar" style="height:63%"></div>
+          <div class="bar" style="height:48%"></div>
+          <div class="bar t" style="height:72%"></div>
+          <div class="bar t" style="height:81%"></div>
+          <div class="bar b" style="height:100%"></div>
+        </div>
+      </div>
+      <figcaption class="vig-caption">Illustrative preview — not client data.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ================================================== proof strip -->
+<div class="proof">
+  <div class="wrap proof-inner">
+    <div class="proof-item"><div class="big">6</div><div class="small">role tiers, each scoped to its own team</div></div>
+    <div class="proof-item"><div class="big">15/15</div><div class="small">security &amp; access checks passed</div></div>
+    <div class="proof-item"><div class="big">Web + Android</div><div class="small">in the office or in the field</div></div>
+    <div class="proof-item"><div class="big">0</div><div class="small">spreadsheets needed to run it</div></div>
+  </div>
+</div>
+
+<!-- ================================================== pain -->
+<section class="section" aria-labelledby="pain-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="pain-title">Sound familiar?</h2>
+      <p class="sec-sub">Most districts run on tools that were never built for the job. It works — until it doesn't.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <h3>The numbers live in five spreadsheets</h3>
+        <p>Branch production gets compiled by hand every week. By the time the district sees it, it's already stale — and no two files agree.</p>
+      </div>
+      <div class="pain-card reveal">
+        <h3>Announcements drown in group chats</h3>
+        <p>One district update gets forwarded across a dozen chats, and half the team still misses it. There's no single place everyone actually checks.</p>
+      </div>
+      <div class="pain-card reveal">
+        <h3>Nobody knows who's actually onboard</h3>
+        <p>Who's registered, who's coded, who's gone quiet — you find out by asking around, one manager at a time.</p>
+      </div>
+    </div>
+    <p class="pain-close reveal">Insure Portal replaces all of that with one system your whole district logs into.</p>
+  </div>
+</section>
+
+<!-- ================================================== features -->
+<section class="section alt" id="features" aria-labelledby="features-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="features-title">Built for every level of the agency</h2>
+      <p class="sec-sub">Everyone logs into the same portal — and each role sees exactly the tools their job needs.</p>
+    </div>
+
+    <!-- district -->
+    <div class="role">
+      <div class="role-copy reveal">
+        <span class="role-tag">District &amp; Area Leaders</span>
+        <h3>See everything. Steer everything.</h3>
+        <ul>
+          <li><span><strong>District-wide dashboard</strong> — APE, NAP, case count, and newly coded recruits, filterable to any branch or agent. One click exports it to Excel.</span></li>
+          <li><span><strong>Announcements with real reach</strong> — post once to the whole district, or target a single branch or unit.</span></li>
+          <li><span><strong>The org chart in your hands</strong> — create areas, branches, and units, assign managers, manage invite codes. No IT ticket.</span></li>
+          <li><span><strong>Bulk import</strong> — upload the company's own Excel exports (Agent List, Policy Issued, NAP Report) as-is. No reformatting.</span></li>
+        </ul>
+      </div>
+      <div class="role-vig reveal">
+        <div class="vignette" role="img" aria-label="Illustrative preview of posting a district-wide announcement">
+          <div class="compose" aria-hidden="true">
+            <div class="compose-row">
+              Announce to: <span class="select-mock">Whole district</span>
+            </div>
+          </div>
+          <div class="post" aria-hidden="true">
+            <span class="post-tag">ANNOUNCEMENT</span>
+            <div class="post-head">
+              <div class="avatar">DM</div>
+              <div class="post-who">
+                <div class="name">District Manager</div>
+                <div class="meta">Just now · Whole district</div>
+              </div>
+            </div>
+            <p class="post-body">📣 Recognition night is on Friday, 6 PM. Every branch that hit quota this quarter — you're up on stage. See you all there!</p>
+            <div class="post-actions"><span>👍 Like</span><span>💬 Comment</span></div>
+          </div>
+          <figcaption class="vig-caption">Illustrative preview — not client data.</figcaption>
+        </div>
+      </div>
+    </div>
+
+    <!-- branch -->
+    <div class="role">
+      <div class="role-copy reveal">
+        <span class="role-tag">Branch &amp; Unit Managers</span>
+        <h3>Run your team without the paperwork.</h3>
+        <ul>
+          <li><span><strong>A roster that knows its own status</strong> — mark agents as coded, assign agent codes, delist without losing a single record. Relisting takes one click.</span></li>
+          <li><span><strong>Signups wait for your sign-off</strong> — every new account is held pending until its manager approves it.</span></li>
+          <li><span><strong>Incentive requests, with guardrails</strong> — submit for your team and watch the live counter against your monthly cap.</span></li>
+          <li><span><strong>One pipeline, one library</strong> — recruiting leads and training material in a shared place, not scattered across chats.</span></li>
+        </ul>
+      </div>
+      <div class="role-vig reveal">
+        <div class="vignette" role="img" aria-label="Illustrative preview of the team roster with coding status and approvals">
+          <div class="vig-head">
+            <span class="vig-title">Team Roster</span>
+            <span class="vig-chip">Unit Alpha</span>
+          </div>
+          <div aria-hidden="true">
+            <div class="roster-row">
+              <div class="avatar brass">JS</div>
+              <div class="roster-who"><div class="name">J. Santos</div><div class="meta">Agent · Unit Alpha</div></div>
+              <span class="chip coded">Coded ✓</span>
+            </div>
+            <div class="roster-row">
+              <div class="avatar">MC</div>
+              <div class="roster-who"><div class="name">M. Cruz</div><div class="meta">Agent · Unit Alpha</div></div>
+              <span class="chip pending">Awaiting approval</span>
+              <span class="chip action">Approve</span>
+            </div>
+            <div class="roster-row">
+              <div class="avatar brass">AR</div>
+              <div class="roster-who"><div class="name">A. Reyes</div><div class="meta">Agent · Unit Alpha</div></div>
+              <span class="chip coded">Coded ✓</span>
+            </div>
+          </div>
+          <figcaption class="vig-caption">Illustrative preview — not client data.</figcaption>
+        </div>
+      </div>
+    </div>
+
+    <!-- agents -->
+    <div class="role">
+      <div class="role-copy reveal">
+        <span class="role-tag">Agents</span>
+        <h3>A feed built for the work.</h3>
+        <ul>
+          <li><span><strong>Wins get seen</strong> — a closed policy or referral gets likes and comments from the whole team, and shows up on the branch leaderboard.</span></li>
+          <li><span><strong>Your numbers, always current</strong> — personal APE and NAP over time, without waiting for someone's spreadsheet.</span></li>
+          <li><span><strong>Everything in one app</strong> — calendar, training resources, and requests, on the phone that's already in their pocket.</span></li>
+        </ul>
+      </div>
+      <div class="role-vig reveal">
+        <div class="vignette" role="img" aria-label="Illustrative preview of an agent's post celebrating a closed policy">
+          <div class="post" aria-hidden="true">
+            <div class="post-head">
+              <div class="avatar brass">PA</div>
+              <div class="post-who">
+                <div class="name">P. Aquino</div>
+                <div class="meta">Agent · 2 hours ago</div>
+              </div>
+            </div>
+            <p class="post-body">Closed my first VUL policy this week! 🎉 Thank you sir for the mentoring and to the whole team for the support. On to the next one! 💪</p>
+            <div class="post-actions"><span>👍 12</span><span>💬 5 comments</span></div>
+          </div>
+          <figcaption class="vig-caption">Illustrative preview — not client data.</figcaption>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================== trust -->
+<section class="trust" id="security" aria-labelledby="trust-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="eyebrow">Built on trust</p>
+      <h2 id="trust-title">Every role sees exactly its own scope — nothing more.</h2>
+      <p class="sec-sub">Before recommending Insure Portal for rollout, we ran a 15-point boundary audit across every role tier — district, area, branch, unit, and agent. Every check passed.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <span class="mark" aria-hidden="true">✓</span>
+        <h3>Branches can't see each other</h3>
+        <p>A branch manager cannot view another branch's members, production, or numbers — verified live by creating a second branch and confirming it was fully invisible to an unrelated manager.</p>
+      </div>
+      <div class="trust-card reveal">
+        <span class="mark" aria-hidden="true">✓</span>
+        <h3>New accounts are locked until approved</h3>
+        <p>No dashboard, no roster, no feed before a manager's sign-off — enforced on the server, not just hidden in a menu.</p>
+      </div>
+      <div class="trust-card reveal">
+        <span class="mark" aria-hidden="true">✓</span>
+        <h3>District-wide reach is a leader's tool</h3>
+        <p>Only district and area leaders can post to the whole district. A branch manager's post simply has no option to go beyond their own team.</p>
+      </div>
+      <div class="trust-card reveal">
+        <span class="mark" aria-hidden="true">✓</span>
+        <h3>Nothing is ever lost</h3>
+        <p>Delisting an agent hides them from the active roster — their account, posts, and production history stay on record, and relisting is one click.</p>
+      </div>
+    </div>
+    <p class="trust-note reveal">Insure Portal runs on a managed cloud database with row-level security — the same access rules apply whether someone uses the app, the website, or anything in between.</p>
+  </div>
+</section>
+
+<!-- ================================================== rollout -->
+<section class="section" id="rollout" aria-labelledby="rollout-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="rollout-title">A rollout that doesn't bet the district</h2>
+      <p class="sec-sub">You don't switch everything overnight. You prove it with one branch first.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">Step 01</div>
+        <h3>Pilot one branch</h3>
+        <p>One branch runs Insure Portal for 2–4 weeks alongside its current process. Nothing is replaced yet — just compared.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">Step 02</div>
+        <h3>Managers weigh in</h3>
+        <p>Branch and unit managers say what's missing and what worked. The product gets tuned before it goes wider.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">Step 03</div>
+        <h3>Roll out branch by branch</h3>
+        <p>The district comes onboard one branch at a time, with data import support for each — agent lists and production history included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== faq -->
+<section class="section alt" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="faq-title">Questions leaders actually ask</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>What devices does it run on?</summary>
+        <p>Any modern web browser, plus a native Android app. iPhone users can use it through the browser — the site is built phone-first.</p>
+      </details>
+      <details>
+        <summary>Who approves new accounts?</summary>
+        <p>Managers do. A new signup is held in a pending state and sees nothing — no roster, no feed, no numbers — until the right manager approves it.</p>
+      </details>
+      <details>
+        <summary>Where does our data live?</summary>
+        <p>In a managed cloud database with row-level security. Access rules are enforced at the database itself, so each branch and unit sees only its own data — regardless of how they connect.</p>
+      </details>
+      <details>
+        <summary>Can we import our existing records?</summary>
+        <p>Yes. The company's standard Excel exports — Agent List, Policy Issued, NAP Report — upload as-is, no reformatting. Agents who haven't signed up yet are held in a roster and linked automatically when they register.</p>
+      </details>
+      <details>
+        <summary>What happens when an agent leaves?</summary>
+        <p>Delist them. They disappear from the active roster, but their account and full history stay on record — and if they come back, relisting takes one click.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== closer -->
+<section class="closer" aria-labelledby="closer-title">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="closer-title" class="serif">See it with your own district's structure.</h2>
+      <p>A 30-minute walkthrough is enough to know if it fits. Bring one branch manager — no commitment.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20demo%20request">Request a demo</a>
+      </div>
+      <p class="fine">Replies within one business day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== footer -->
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50,7 L83,20 V47 C83,71 68,86 50,93 C32,86 17,71 17,47 V20 Z" fill="none" stroke="#1b2420" stroke-width="4.2" stroke-linejoin="round"/>
+        <rect x="31.5" y="53" width="8.5" height="14" rx="1.6" fill="#1b2420"/>
+        <rect x="45.75" y="44" width="8.5" height="23" rx="1.6" fill="#a17d4f"/>
+        <rect x="60" y="33" width="8.5" height="34" rx="1.6" fill="#92672f"/>
+      </svg>
+      Insure Portal
+    </div>
+    <div class="foot-links">
+      <a href="https://insureportal.vercel.app">Already a member? Log in</a>
+      <a href="https://insureportal.vercel.app/privacy">Privacy Policy</a>
+    </div>
+    <div class="foot-copy">© 2026 Insure Portal — Agency Social Network</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Nav border on scroll
+    var nav = document.getElementById("nav");
+    function onScroll() {
+      nav.classList.toggle("scrolled", window.scrollY > 8);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // Scroll reveals
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        io.observe(el);
+      });
+    } else {
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        el.classList.add("in");
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
