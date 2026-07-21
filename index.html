@@ -355,6 +355,11 @@
     font-family: var(--mono);
     font-size: 20px;
     font-weight: 600;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 460px) {
+    .proof-item .big { font-size: 15px; }
   }
 
   .proof-item .small {
@@ -443,6 +448,100 @@
     font-size: 20px;
     font-style: italic;
     color: var(--brass-ink);
+  }
+
+  /* comparison */
+
+  .compare-note {
+    font-size: 15.5px;
+    color: var(--ink-soft);
+    background: var(--brass-soft);
+    border: 1px solid #e3d3ac;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 36px;
+    max-width: 62ch;
+  }
+
+  .compare-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .compare-label {
+    display: flex;
+    align-items: center;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--muted);
+    line-height: 1.35;
+    padding-right: 8px;
+  }
+
+  .compare-card {
+    border-radius: 12px;
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+  }
+
+  .compare-card.now {
+    background: var(--paper);
+  }
+
+  .compare-card.next {
+    background: var(--white);
+    border-color: #e3d3ac;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .compare-kicker {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .compare-card.now .compare-kicker { color: var(--faint); }
+  .compare-card.next .compare-kicker { color: var(--brass-ink); }
+
+  .compare-card p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .compare-card.now p { color: var(--muted); }
+
+  .compare-close {
+    margin-top: 36px;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--brass-ink);
+  }
+
+  @media (max-width: 780px) {
+    .compare-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .compare-label {
+      padding-right: 0;
+      font-size: 13px;
+    }
   }
 
   /* role blocks */
@@ -912,6 +1011,7 @@
       Insure Portal
     </a>
     <div class="nav-links">
+      <a class="anchor" href="#compare">Compare</a>
       <a class="anchor" href="#features">Features</a>
       <a class="anchor" href="#security">Security</a>
       <a class="anchor" href="#rollout">Rollout</a>
@@ -968,7 +1068,7 @@
   <div class="wrap proof-inner">
     <div class="proof-item"><div class="big">6</div><div class="small">role tiers, each scoped to its own team</div></div>
     <div class="proof-item"><div class="big">15/15</div><div class="small">security &amp; access checks passed</div></div>
-    <div class="proof-item"><div class="big">Web + Android</div><div class="small">in the office or in the field</div></div>
+    <div class="proof-item"><div class="big">Web · iOS · Android</div><div class="small">in the office or in the field</div></div>
     <div class="proof-item"><div class="big">0</div><div class="small">spreadsheets needed to run it</div></div>
   </div>
 </div>
@@ -999,8 +1099,85 @@
   </div>
 </section>
 
+<!-- ================================================== compare -->
+<section class="section alt" id="compare" aria-labelledby="compare-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="compare-title">You're not switching from nothing</h2>
+      <p class="sec-sub">Most districts already run on Telegram for messaging and Excel for monitoring. Here's the same day, two ways.</p>
+    </div>
+
+    <p class="compare-note reveal">Telegram is a great messenger. Excel is a great calculator. Neither was built to run a district — and that's not a knock on either one.</p>
+
+    <div class="compare-rows">
+      <div class="compare-row reveal">
+        <div class="compare-label">Announcing something important</div>
+        <div class="compare-card now">
+          <div class="compare-kicker">Today</div>
+          <p>Post it in the group, pin it, and watch it get buried by 40 messages before lunch. Whoever joined last month never saw it at all.</p>
+        </div>
+        <div class="compare-card next">
+          <div class="compare-kicker">With Insure Portal</div>
+          <p>Announcements are pinned and highlighted, scoped to district, branch, or unit. The right people see it, and it stays visible until it expires.</p>
+        </div>
+      </div>
+
+      <div class="compare-row reveal">
+        <div class="compare-label">Checking branch production</div>
+        <div class="compare-card now">
+          <div class="compare-kicker">Today</div>
+          <p>Text each branch for their numbers, wait, paste into the master file, and hope it's the right version of <em>MONITORING_FINAL_v3(2).xlsx</em>.</p>
+        </div>
+        <div class="compare-card next">
+          <div class="compare-kicker">With Insure Portal</div>
+          <p>The dashboard is already computed — APE, NAP, case count, filterable by branch or agent. Export to Excel in one click, whenever you actually need it.</p>
+        </div>
+      </div>
+
+      <div class="compare-row reveal">
+        <div class="compare-label">Finding last month's training material</div>
+        <div class="compare-card now">
+          <div class="compare-kicker">Today</div>
+          <p>Scroll the Telegram files tab and hope it wasn't posted in the other group. New members can't find anything from before they joined.</p>
+        </div>
+        <div class="compare-card next">
+          <div class="compare-kicker">With Insure Portal</div>
+          <p>One Training &amp; Resources library — the same one, for every member, for as long as they're on the team.</p>
+        </div>
+      </div>
+
+      <div class="compare-row reveal">
+        <div class="compare-label">Onboarding a new agent</div>
+        <div class="compare-card now">
+          <div class="compare-kicker">Today</div>
+          <p>Add them to five group chats, forward old files by hand, and track their coding status in a sheet only one person remembers to update.</p>
+        </div>
+        <div class="compare-card next">
+          <div class="compare-kicker">With Insure Portal</div>
+          <p>They sign up, their manager approves, and the roster tracks coded and pending status by itself.</p>
+        </div>
+      </div>
+
+      <div class="compare-row reveal">
+        <div class="compare-label">Who sees what</div>
+        <div class="compare-card now">
+          <div class="compare-kicker">Today</div>
+          <p>Everyone in the group sees everything, and whoever holds the Excel file holds all the data — every branch's, at once.</p>
+        </div>
+        <div class="compare-card next">
+          <div class="compare-kicker">With Insure Portal</div>
+          <p>Every role sees exactly its own scope, enforced by the database itself — not by who remembered to hide a sheet.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="compare-close reveal">Keep Telegram for the chika. Move the business to the portal.</p>
+  </div>
+</section>
+
 <!-- ================================================== features -->
-<section class="section alt" id="features" aria-labelledby="features-title">
+<section class="section" id="features" aria-labelledby="features-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -1190,7 +1367,15 @@
     <div class="faq-list reveal">
       <details>
         <summary>What devices does it run on?</summary>
-        <p>Any modern web browser, plus a native Android app. iPhone users can use it through the browser — the site is built phone-first.</p>
+        <p>Any modern web browser, plus a native Android app. On iPhone, open it in Safari and add it to your home screen — it runs like an app, no App Store needed. The whole site is built phone-first either way.</p>
+      </details>
+      <details>
+        <summary>We already run everything on Telegram — do we have to leave it?</summary>
+        <p>No. Keep your group chats for the day-to-day chika. Insure Portal takes over the parts Telegram was never built for — production tracking, approvals, and a training library that doesn't get buried.</p>
+      </details>
+      <details>
+        <summary>Our monitoring is in Excel — do we lose all of it?</summary>
+        <p>No. The company's existing Excel exports import as-is, no reformatting. And the dashboard exports back to Excel any time you need it — it's an output now, not your only copy.</p>
       </details>
       <details>
         <summary>Who approves new accounts?</summary>
