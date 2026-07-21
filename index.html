@@ -938,6 +938,225 @@
     max-width: 62ch;
   }
 
+  /* ------------------------------------------------ pricing */
+
+  .billing-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 40px;
+  }
+
+  .billing-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .billing-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .billing-btn .save-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--brass-bright);
+    background: rgba(220, 175, 95, 0.14);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+
+  .billing-btn.active .save-badge {
+    color: var(--brass-bright);
+    background: rgba(220, 175, 95, 0.22);
+  }
+
+  .free-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: var(--good-soft);
+    border: 1px solid #c9e0d1;
+    border-radius: 12px;
+    padding: 20px 26px;
+    margin-bottom: 20px;
+  }
+
+  .free-banner-text .k { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--good); display: block; margin-bottom: 4px; }
+  .free-banner-text h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; margin: 0 0 4px; }
+  .free-banner-text p { margin: 0; font-size: 14px; color: var(--muted); max-width: 52ch; }
+  .free-banner-price { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--good); white-space: nowrap; }
+  .free-banner-price small { font-size: 12px; font-weight: 500; color: var(--muted); display: block; margin-top: 2px; }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .price-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+
+  .price-card.feat {
+    border-color: #e3d3ac;
+    box-shadow: 0 0 0 1px #e3d3ac, var(--shadow-lg);
+  }
+
+  .price-card .trial-ribbon {
+    position: absolute;
+    top: -10px;
+    left: 18px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+    background: var(--brass);
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+
+  .price-card h3 {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+
+  .price-card .role-blurb {
+    font-size: 12px;
+    color: var(--faint);
+    margin: 0 0 16px;
+    min-height: 2.6em;
+  }
+
+  .price-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+
+  .price-amount .num {
+    font-family: var(--mono);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .price-amount .unit {
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .price-annual-note {
+    font-size: 11.5px;
+    color: var(--brass-ink);
+    margin-bottom: 16px;
+    min-height: 1.4em;
+    visibility: hidden;
+  }
+
+  .price-annual-note.shown { visibility: visible; }
+
+  .price-card ul {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .price-card li {
+    display: flex;
+    gap: 8px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+
+  .price-card li.everything {
+    font-weight: 600;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .price-card li .mark {
+    flex-shrink: 0;
+    color: var(--good);
+    font-weight: 700;
+  }
+
+  .price-cta {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .price-card.feat .price-cta {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .price-cta:hover { border-color: var(--faint); }
+  .price-card.feat .price-cta:hover { background: var(--ink-soft); }
+
+  .price-note {
+    margin-top: 24px;
+    font-size: 13.5px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .price-note a { color: var(--brass-ink); font-weight: 600; text-decoration: none; }
+  .price-note a:hover { text-decoration: underline; }
+
+  @media (max-width: 980px) {
+    .price-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .price-grid { grid-template-columns: 1fr; }
+    .free-banner { flex-direction: column; align-items: flex-start; }
+  }
+
   /* ------------------------------------------------ rollout */
 
   .steps {
@@ -1166,6 +1385,7 @@
       <a class="anchor" href="#compare">Compare</a>
       <a class="anchor" href="#features">Features</a>
       <a class="anchor" href="#security">Security</a>
+      <a class="anchor" href="#pricing">Pricing</a>
       <a class="anchor" href="#rollout">Rollout</a>
       <a class="anchor" href="#faq">FAQ</a>
       <a class="btn btn-primary" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20demo%20request">Request a demo</a>
@@ -1525,6 +1745,117 @@
   </div>
 </section>
 
+<!-- ================================================== pricing -->
+<section class="section alt" id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="pricing-title">One price ladder, from recruit to district</h2>
+      <p class="sec-sub">Every paid tier starts with a 14-day free trial. No card required to try it — pay only if you keep it.</p>
+    </div>
+
+    <div class="billing-toggle reveal" role="group" aria-label="Billing period">
+      <button type="button" class="billing-btn active" data-billing="monthly">Monthly</button>
+      <button type="button" class="billing-btn" data-billing="annual">Annual <span class="save-badge">Save 10%</span></button>
+    </div>
+
+    <div class="free-banner reveal">
+      <div class="free-banner-text">
+        <span class="k">Automatic · No trial needed</span>
+        <h3 class="serif">Non-coded agent</h3>
+        <p>Every new signup starts here, free — feed, messages, recruitment pipeline, and the training library, from day one.</p>
+      </div>
+      <div class="free-banner-price">₱0<small>forever</small></div>
+    </div>
+
+    <div class="price-grid reveal" id="price-grid">
+
+      <div class="price-card">
+        <span class="trial-ribbon">14-day free trial</span>
+        <h3>Coded Agent</h3>
+        <p class="role-blurb">The moment you're coded and log in, the trial starts.</p>
+        <div class="price-amount"><span class="num" data-m="99" data-a="89">₱99</span><span class="unit">/ month</span></div>
+        <div class="price-annual-note">₱1,068 billed annually</div>
+        <ul>
+          <li class="everything">Everything free has, plus:</li>
+          <li><span class="mark">✓</span>Post to the feed &amp; stories</li>
+          <li><span class="mark">✓</span>Personal production tracking (APE/NAP)</li>
+          <li><span class="mark">✓</span>Dashboard, leaderboards &amp; calendar</li>
+          <li><span class="mark">✓</span>Incentives &amp; requests</li>
+          <li><span class="mark">✓</span>Kal, the AI assistant</li>
+        </ul>
+        <a class="price-cta" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20—%20Coded%20Agent%20trial">Start free trial</a>
+      </div>
+
+      <div class="price-card">
+        <span class="trial-ribbon">14-day free trial</span>
+        <h3>Unit Manager</h3>
+        <p class="role-blurb">For managing one unit's roster and approvals.</p>
+        <div class="price-amount"><span class="num" data-m="999" data-a="899">₱999</span><span class="unit">/ month</span></div>
+        <div class="price-annual-note">₱10,788 billed annually</div>
+        <ul>
+          <li class="everything">Everything Coded Agent has, plus:</li>
+          <li><span class="mark">✓</span>Approve new signups in the unit</li>
+          <li><span class="mark">✓</span>Code agents &amp; manage the roster</li>
+          <li><span class="mark">✓</span>Unit-wide production view</li>
+          <li><span class="mark">✓</span>Unit-targeted announcements</li>
+        </ul>
+        <a class="price-cta" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20—%20Unit%20Manager%20trial">Start free trial</a>
+      </div>
+
+      <div class="price-card feat">
+        <span class="trial-ribbon">14-day free trial</span>
+        <h3>Branch Manager</h3>
+        <p class="role-blurb">For running a full branch, every unit included.</p>
+        <div class="price-amount"><span class="num" data-m="1999" data-a="1799">₱1,999</span><span class="unit">/ month</span></div>
+        <div class="price-annual-note">₱21,588 billed annually</div>
+        <ul>
+          <li class="everything">Everything Unit Manager has, plus:</li>
+          <li><span class="mark">✓</span>Branch-wide production &amp; roster</li>
+          <li><span class="mark">✓</span>Bulk data import (Excel)</li>
+          <li><span class="mark">✓</span>Higher incentive-request cap</li>
+          <li><span class="mark">✓</span>Branch-wide announcements</li>
+        </ul>
+        <a class="price-cta" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20—%20Branch%20Manager%20trial">Start free trial</a>
+      </div>
+
+      <div class="price-card">
+        <span class="trial-ribbon">14-day free trial</span>
+        <h3>Area Manager</h3>
+        <p class="role-blurb">For overseeing several branches at once.</p>
+        <div class="price-amount"><span class="num" data-m="2999" data-a="2699">₱2,999</span><span class="unit">/ month</span></div>
+        <div class="price-annual-note">₱32,388 billed annually</div>
+        <ul>
+          <li class="everything">Everything Branch Manager has, plus:</li>
+          <li><span class="mark">✓</span>Multi-branch visibility across the area</li>
+          <li><span class="mark">✓</span>Area-level incentive creation</li>
+          <li><span class="mark">✓</span>Moderation across all area branches</li>
+        </ul>
+        <a class="price-cta" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20—%20Area%20Manager%20trial">Start free trial</a>
+      </div>
+
+      <div class="price-card">
+        <span class="trial-ribbon">14-day free trial</span>
+        <h3>District Manager</h3>
+        <p class="role-blurb">For running the whole district from one login.</p>
+        <div class="price-amount"><span class="num" data-m="4999" data-a="4499">₱4,999</span><span class="unit">/ month</span></div>
+        <div class="price-annual-note">₱53,988 billed annually</div>
+        <ul>
+          <li class="everything">Everything Area Manager has, plus:</li>
+          <li><span class="mark">✓</span>District-wide dashboard &amp; Excel export</li>
+          <li><span class="mark">✓</span>Full org control — areas, branches, units, invite codes</li>
+          <li><span class="mark">✓</span>District-wide announcements &amp; approvals oversight</li>
+          <li><span class="mark">✓</span>Company Excel imports</li>
+        </ul>
+        <a class="price-cta" href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20—%20District%20Manager%20trial">Start free trial</a>
+      </div>
+
+    </div>
+
+    <p class="price-note reveal">Rolling out a whole district? <a href="mailto:michaelgarcia082398@gmail.com?subject=Insure%20Portal%20—%20District-wide%20billing">Ask about district-wide billing</a> at the demo — one invoice instead of one card per agent.</p>
+  </div>
+</section>
+
 <!-- ================================================== rollout -->
 <section class="section" id="rollout" aria-labelledby="rollout-title">
   <div class="wrap">
@@ -1592,6 +1923,14 @@
       <details>
         <summary>Who's Kal?</summary>
         <p>Kal is the assistant built into the app — the shield on the logo, with a face. Ask it about your own production, goals, incentives, or recruitment, and it answers using your real numbers, not a canned response. It only ever sees what you're already allowed to see.</p>
+      </details>
+      <details>
+        <summary>What happens when my trial ends?</summary>
+        <p>Nothing gets deleted. Your account drops to the same free access non-coded agents have — feed, messages, recruitment, and resources — with every bit of your history intact. Upgrade any time and you pick up right where you left off.</p>
+      </details>
+      <details>
+        <summary>Who pays — the agent, or the agency?</summary>
+        <p>Either. Agents can pay for their own plan individually, or a branch or district can put the whole team on one bill. Ask about district-wide billing at the demo.</p>
       </details>
     </div>
   </div>
@@ -1666,6 +2005,26 @@
         el.classList.add("in");
       });
     }
+
+    // Pricing: monthly / annual toggle
+    var billingBtns = document.querySelectorAll(".billing-btn");
+    var priceNums = document.querySelectorAll(".price-amount .num");
+    var annualNotes = document.querySelectorAll(".price-annual-note");
+    billingBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var mode = btn.getAttribute("data-billing");
+        billingBtns.forEach(function (b) {
+          b.classList.toggle("active", b === btn);
+        });
+        priceNums.forEach(function (el) {
+          var value = mode === "annual" ? el.getAttribute("data-a") : el.getAttribute("data-m");
+          el.textContent = "₱" + Number(value).toLocaleString("en-PH");
+        });
+        annualNotes.forEach(function (el) {
+          el.classList.toggle("shown", mode === "annual");
+        });
+      });
+    });
   })();
 </script>
 
