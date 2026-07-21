@@ -607,6 +607,17 @@
     margin-top: 9px;
   }
 
+  .role li.mascot::before {
+    content: none;
+  }
+
+  .role li.mascot svg {
+    flex-shrink: 0;
+    width: 19px;
+    height: 19px;
+    margin-top: 2px;
+  }
+
   .role:nth-child(even) .role-copy { order: 2; }
   .role:nth-child(even) .role-vig { order: 1; }
 
@@ -998,6 +1009,20 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="kal-icon" viewBox="0 0 100 100">
+      <path d="M50,8 L84,21 V48 C84,72 69,87 50,94 C31,87 16,72 16,48 V21 Z" fill="#ffffff" stroke="#1b2420" stroke-width="4.4" stroke-linejoin="round"/>
+      <circle cx="39" cy="38" r="3.8" fill="#1b2420"/>
+      <circle cx="61" cy="38" r="3.8" fill="#1b2420"/>
+      <path d="M41,48 Q50,56 59,48" fill="none" stroke="#1b2420" stroke-width="3.2" stroke-linecap="round"/>
+      <rect x="35.5" y="68" width="7.5" height="11" rx="1.6" fill="#1b2420"/>
+      <rect x="46.2" y="63" width="7.5" height="16" rx="1.6" fill="#a17d4f"/>
+      <rect x="57" y="58" width="7.5" height="21" rx="1.6" fill="#92672f"/>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- ================================================== nav -->
 <nav class="nav" id="nav" aria-label="Main">
   <div class="wrap nav-inner">
@@ -1195,6 +1220,7 @@
           <li><span><strong>Announcements with real reach</strong> — post once to the whole district, or target a single branch or unit.</span></li>
           <li><span><strong>The org chart in your hands</strong> — create areas, branches, and units, assign managers, manage invite codes. No IT ticket.</span></li>
           <li><span><strong>Bulk import</strong> — upload the company's own Excel exports (Agent List, Policy Issued, NAP Report) as-is. No reformatting.</span></li>
+          <li class="mascot"><svg><use href="#kal-icon"/></svg><span><strong>Kal, the built-in assistant</strong> — ask "how's the district doing this month?" and get a real, current answer, no spreadsheet required.</span></li>
         </ul>
       </div>
       <div class="role-vig reveal">
@@ -1231,6 +1257,7 @@
           <li><span><strong>Signups wait for your sign-off</strong> — every new account is held pending until its manager approves it.</span></li>
           <li><span><strong>Incentive requests, with guardrails</strong> — submit for your team and watch the live counter against your monthly cap.</span></li>
           <li><span><strong>One pipeline, one library</strong> — recruiting leads and training material in a shared place, not scattered across chats.</span></li>
+          <li class="mascot"><svg><use href="#kal-icon"/></svg><span><strong>Kal, the built-in assistant</strong> — ask about your team's production or your incentive cap and get answered on the spot.</span></li>
         </ul>
       </div>
       <div class="role-vig reveal">
@@ -1271,6 +1298,7 @@
           <li><span><strong>Wins get seen</strong> — a closed policy or referral gets likes and comments from the whole team, and shows up on the branch leaderboard.</span></li>
           <li><span><strong>Your numbers, always current</strong> — personal APE and NAP over time, without waiting for someone's spreadsheet.</span></li>
           <li><span><strong>Everything in one app</strong> — calendar, training resources, and requests, on the phone that's already in their pocket.</span></li>
+          <li class="mascot"><svg><use href="#kal-icon"/></svg><span><strong>Kal, the built-in assistant</strong> — ask "how's my APE this month?" and get a straight answer, day or night.</span></li>
         </ul>
       </div>
       <div class="role-vig reveal">
@@ -1392,6 +1420,10 @@
       <details>
         <summary>What happens when an agent leaves?</summary>
         <p>Delist them. They disappear from the active roster, but their account and full history stay on record — and if they come back, relisting takes one click.</p>
+      </details>
+      <details>
+        <summary>Who's Kal?</summary>
+        <p>Kal is the assistant built into the app — the shield on the logo, with a face. Ask it about your own production, goals, incentives, or recruitment, and it answers using your real numbers, not a canned response. It only ever sees what you're already allowed to see.</p>
       </details>
     </div>
   </div>
