@@ -744,6 +744,133 @@
   .chip.pending { background: var(--brass-soft); color: var(--brass-ink); }
   .chip.action { background: var(--ink); color: var(--paper); }
 
+  /* ------------------------------------------------ Kal spotlight */
+
+  .kal-section {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 52px;
+    align-items: center;
+  }
+
+  .kal-portrait {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+
+  .kal-portrait-ring {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    background: var(--brass-soft);
+    border: 1px solid #e3d3ac;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kal-portrait-ring svg { width: 74px; height: 74px; }
+
+  .kal-copy { text-align: center; }
+
+  .kal-copy h3 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .kal-copy .kal-role {
+    font-size: 13px;
+    color: var(--brass-ink);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin: 0 0 16px;
+  }
+
+  .kal-copy p.kal-desc {
+    font-size: 15.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 42ch;
+    margin: 0 auto 22px;
+  }
+
+  .kal-caps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .kal-cap {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 13px;
+  }
+
+  .kal-vig .vig-head { align-items: center; }
+  .kal-vig .vig-head .vig-title { display: flex; align-items: center; gap: 8px; }
+  .kal-vig .vig-title svg { width: 20px; height: 20px; }
+
+  .kal-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--good);
+  }
+
+  .kal-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--good);
+  }
+
+  .kal-msgs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px 18px;
+  }
+
+  .kal-msg {
+    max-width: 84%;
+    padding: 9px 13px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .kal-msg.user {
+    align-self: flex-end;
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom-right-radius: 4px;
+  }
+
+  .kal-msg.bot {
+    align-self: flex-start;
+    background: var(--bg);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-bottom-left-radius: 4px;
+  }
+
+  @media (max-width: 780px) {
+    .kal-section { grid-template-columns: 1fr; gap: 30px; }
+  }
+
   /* ------------------------------------------------ trust band */
 
   .trust {
@@ -1220,7 +1347,6 @@
           <li><span><strong>Announcements with real reach</strong> — post once to the whole district, or target a single branch or unit.</span></li>
           <li><span><strong>The org chart in your hands</strong> — create areas, branches, and units, assign managers, manage invite codes. No IT ticket.</span></li>
           <li><span><strong>Bulk import</strong> — upload the company's own Excel exports (Agent List, Policy Issued, NAP Report) as-is. No reformatting.</span></li>
-          <li class="mascot"><svg><use href="#kal-icon"/></svg><span><strong>Kal, the built-in assistant</strong> — ask "how's the district doing this month?" and get a real, current answer, no spreadsheet required.</span></li>
         </ul>
       </div>
       <div class="role-vig reveal">
@@ -1257,7 +1383,6 @@
           <li><span><strong>Signups wait for your sign-off</strong> — every new account is held pending until its manager approves it.</span></li>
           <li><span><strong>Incentive requests, with guardrails</strong> — submit for your team and watch the live counter against your monthly cap.</span></li>
           <li><span><strong>One pipeline, one library</strong> — recruiting leads and training material in a shared place, not scattered across chats.</span></li>
-          <li class="mascot"><svg><use href="#kal-icon"/></svg><span><strong>Kal, the built-in assistant</strong> — ask about your team's production or your incentive cap and get answered on the spot.</span></li>
         </ul>
       </div>
       <div class="role-vig reveal">
@@ -1298,7 +1423,6 @@
           <li><span><strong>Wins get seen</strong> — a closed policy or referral gets likes and comments from the whole team, and shows up on the branch leaderboard.</span></li>
           <li><span><strong>Your numbers, always current</strong> — personal APE and NAP over time, without waiting for someone's spreadsheet.</span></li>
           <li><span><strong>Everything in one app</strong> — calendar, training resources, and requests, on the phone that's already in their pocket.</span></li>
-          <li class="mascot"><svg><use href="#kal-icon"/></svg><span><strong>Kal, the built-in assistant</strong> — ask "how's my APE this month?" and get a straight answer, day or night.</span></li>
         </ul>
       </div>
       <div class="role-vig reveal">
@@ -1319,6 +1443,50 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ================================================== kal -->
+<section class="section alt" id="kal" aria-labelledby="kal-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2 id="kal-title">The assistant that's already in there</h2>
+      <p class="sec-sub">Every member gets Kal — the shield on the logo, with a face. Type a real question, get a real answer, using your actual data.</p>
+    </div>
+
+    <div class="kal-section reveal">
+      <div class="kal-copy">
+        <div class="kal-portrait">
+          <div class="kal-portrait-ring"><svg viewBox="0 0 100 100"><use href="#kal-icon"/></svg></div>
+        </div>
+        <h3 class="serif">Kal</h3>
+        <p class="kal-role">Built into every account</p>
+        <p class="kal-desc">Kal isn't a scripted FAQ bot. It reads the same production, goals, incentives, recruitment, and resource data you're already allowed to see, and answers straight from it — no digging through tabs, no waiting on someone else to check.</p>
+        <div class="kal-caps">
+          <span class="kal-cap">Your own production</span>
+          <span class="kal-cap">Team &amp; district numbers</span>
+          <span class="kal-cap">Goals &amp; incentives</span>
+          <span class="kal-cap">Training &amp; resources</span>
+        </div>
+      </div>
+
+      <div class="kal-vig">
+        <div class="vignette" role="img" aria-label="Illustrative preview of a conversation with Kal, the AI assistant">
+          <div class="vig-head">
+            <span class="vig-title"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#kal-icon"/></svg>Kal</span>
+            <span class="kal-status" aria-hidden="true">Online</span>
+          </div>
+          <div class="kal-msgs" aria-hidden="true">
+            <div class="kal-msg user">how's my APE this month?</div>
+            <div class="kal-msg bot">You're at ₱186,000 APE so far this month, across 4 issued cases. That's ahead of where you were at this point last month.</div>
+            <div class="kal-msg user">am I close to my incentive cap?</div>
+            <div class="kal-msg bot">You've used 2 of your 3 requests this month — one more before it resets.</div>
+          </div>
+          <figcaption class="vig-caption">Illustrative preview — not client data.</figcaption>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
